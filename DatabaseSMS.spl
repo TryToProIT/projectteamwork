@@ -1,0 +1,70 @@
+CREATE TABLE SinhVien (
+    MaSinhVien INT PRIMARY KEY,
+    TenSinhVien VARCHAR(50),
+    Lop NVARCHAR(70),
+	Khoa NVARCHAR(50),
+    Ngaysinh DATE,
+	Quequan NVARCHAR(50),
+	GioiTinh NVARCHAR(50),
+);
+
+-- Tạo bảng GiaoVien
+CREATE TABLE GiangVien (
+    MaGiangVien INT PRIMARY KEY,
+    TenGiangVien VARCHAR(50),
+    Ngaysinh DATE,
+	Quequan NVARCHAR(50),
+	GioiTinh NVARCHAR(50),
+);
+Create table 	Admin
+(
+   MaAdmin INT PRIMARY KEY,
+   TenAdmin NVARCHAR(50),
+   GioiTinh Nvarchar(50)
+);
+-- Tạo bảng HocPhan
+CREATE TABLE HocPhan (
+    MaHocPhan INT PRIMARY KEY,
+    TenHocPhan VARCHAR(50),
+    ThoiKhoaBieu VARCHAR(50),
+    SoTinChi INT,
+    MaGiaoVien INT,
+    FOREIGN KEY (MaGiaoVien) REFERENCES GiangVien(MaGiangVien)
+);
+-- Tạo bảng Diem
+CREATE TABLE Diem (
+    MaSinhVien INT,
+    MaHocPhan INT,
+    ChuyenCan FLOAT,
+    KiemTraCuoiKi FLOAT,
+    XepLoai VARCHAR(20),
+    FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
+    FOREIGN KEY (MaHocPhan) REFERENCES HocPhan(MaHocPhan)
+);
+-- Tạo bảng ChuongTrinhGiangDay
+CREATE TABLE ChuongTrinhGiangDay (
+    MaHocPhan INT PRIMARY KEY,
+    TenHocPhan VARCHAR(50),
+    SoTinChi INT
+);
+CREATE TABLE TaiKhoanSV
+(
+    MaTaiKhoan VARCHAR(50) PRIMARY KEY,
+	MaSinhVien INT FOREIGN KEY (MaSinhVien) references SinhVien(MaSinhVien),
+	Tendangnhap VARCHAR(50),
+	Matkhau Varchar(50)
+);
+CREATE TABLE TaiKhoanGV
+(
+    MaTaiKhoan VARCHAR(50) PRIMARY KEY,
+	MaGiangVien INT FOREIGN KEY (MaGiangVien) references SinhVien(MaSinhVien),
+	Tendangnhap VARCHAR(50),
+	Matkhau Varchar(50)
+);
+CREATE TABLE TaiKhoanAdmin
+(
+    MaTaiKhoan VARCHAR(50) PRIMARY KEY,
+	MaAdmin INT FOREIGN KEY (MaAdmin) references Admin(MaAdmin),
+	Tendangnhap VARCHAR(50),
+	Matkhau Varchar(50)
+);
